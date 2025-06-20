@@ -56,11 +56,8 @@ func (fc *FileCache) Set(key string, data []byte) error {
 func (fc *FileCache) SetWithTTL(key string, data []byte, ttl time.Duration) error {
 	expireAt := time.Now().Add(ttl)
 
-	hasKey := strings.ReplaceAll(key, "_info.json", "")
-	hasKey = strings.ReplaceAll(hasKey, "_toc.json", "")
-
 	item := CacheItem{
-		Key:      hasKey,
+		Key:      key,
 		Data:     data,
 		ExpireAt: expireAt,
 		Created:  time.Now(),
